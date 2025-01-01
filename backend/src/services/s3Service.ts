@@ -1,5 +1,7 @@
 import AWS from 'aws-sdk';
 import filetype from 'magic-bytes.js'
+import generateFileName from "./fileNameGeneratorService";
+import { Response } from '../types/response';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -10,12 +12,18 @@ const bucketName = process.env.AWS_BUCKET_NAME
 const SUPPORTED_IMAGE_TYPES = ['image/jpeg', 'image/png'];
 const SUPPORTED_VIDEO_TYPES = ['video/mp4', 'video/quicktime'];
 
-async function uploadImageToS3(folderName: string, fileBuffer: Buffer, fileName: string) {
-    if (!folderName || !fileBuffer || !fileName) {
+async function uploadImageToS3(farmUUID: string, fileBuffer: Buffer): Promise<Response<string>> {
+    if (!farmUUID || !fileBuffer) {
         return {
             success: false,
-            error: 'Folder name, file buffer and file name must be provided!',
+            error: 'Farm UUID and file buffer must be provided!',
         };
+    }
+
+    const filename = generateFileName(farmUUID)
+
+    if (!filename) {
+        throw new Error('Filename not valid!');
     }
 
     const [fileInfo] = filetype(fileBuffer);
@@ -24,7 +32,7 @@ async function uploadImageToS3(folderName: string, fileBuffer: Buffer, fileName:
     if (!mime || !SUPPORTED_IMAGE_TYPES.includes(mime)) {
         return {
             success: false,
-            error: 'Unsupported image type!',
+            error: 'Unsupported image type or failed to detect MIME type!',
         };
     }
 
@@ -32,21 +40,21 @@ async function uploadImageToS3(folderName: string, fileBuffer: Buffer, fileName:
         throw new Error('Bucket name is not defined in the environment variables!');
     }
 
-    const s3Key = `${folderName}/${fileName}`;
+    const s3Key = `${farmUUID}/${filename}`;
 
     const params = {
         Bucket: bucketName,
         Key: s3Key,
         Body: fileBuffer,
         ContentType: mime
-    }
+    };
 
     try {
-        const data = await s3.upload(params).promise();
+        await s3.upload(params).promise();
 
         return {
             success: true,
-            data: data.Location,
+            data: s3Key,
         };
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
@@ -59,12 +67,18 @@ async function uploadImageToS3(folderName: string, fileBuffer: Buffer, fileName:
     }
 }
 
-async function uploadVideoTos3(folderName: string, fileBuffer: Buffer, fileName: string) {
-    if (!folderName || !fileBuffer || !fileName) {
+async function uploadVideoTos3(farmUUID: string, fileBuffer: Buffer) {
+    if (!farmUUID || !fileBuffer) {
         return {
             success: false,
-            error: 'Folder name, file buffer and file name must be provided!',
+            error: 'Farm UUID and file buffer must be provided!',
         };
+    }
+
+    const filename = generateFileName(farmUUID)
+
+    if (!filename) {
+        throw new Error('Filename not valid!');
     }
 
     const [fileInfo] = filetype(fileBuffer);
@@ -73,7 +87,7 @@ async function uploadVideoTos3(folderName: string, fileBuffer: Buffer, fileName:
     if (!mime || !SUPPORTED_VIDEO_TYPES.includes(mime)) {
         return {
             success: false,
-            error: 'Unsupported video type!',
+            error: 'Unsupported video type or failed to detect MIME type!',
         };
     }
 
@@ -81,21 +95,21 @@ async function uploadVideoTos3(folderName: string, fileBuffer: Buffer, fileName:
         throw new Error('Bucket name is not defined in the environment variables!');
     }
 
-    const s3Key = `${folderName}/${fileName}`;
+    const s3Key = `${farmUUID}/${filename}`;
 
     const params = {
         Bucket: bucketName,
         Key: s3Key,
         Body: fileBuffer,
         ContentType: mime
-    }
+    };
 
     try {
-        const data = await s3.upload(params).promise();
+        await s3.upload(params).promise();
 
         return {
             success: true,
-            data: data.Location,
+            data: s3Key,
         };
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
