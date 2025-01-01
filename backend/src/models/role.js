@@ -1,7 +1,7 @@
 'use strict';
 import {Model} from 'sequelize';
 
-const Role = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
     /**
      * Helper method for defining associations.
@@ -40,5 +40,3 @@ const Role = (sequelize, DataTypes) => {
 
   return Role;
 };
-
-export default Role;

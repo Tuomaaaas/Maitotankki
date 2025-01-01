@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const config = {
+module.exports = {
     development: {
         username: process.env.DEVELOPMENT_USERNAME,
         password: process.env.DEVELOPMENT_PASSWORD,
@@ -25,5 +25,3 @@ const config = {
         dialect: 'mariadb',
     },
 };
-
-export default config;

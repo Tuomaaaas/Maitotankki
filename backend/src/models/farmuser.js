@@ -1,7 +1,7 @@
 'use strict';
 import {Model} from 'sequelize';
 
-const FarmUser = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class FarmUser extends Model {
     /**
      * Helper method for defining associations.
@@ -51,5 +51,3 @@ const FarmUser = (sequelize, DataTypes) => {
 
   return FarmUser;
 };
-
-export default FarmUser;
