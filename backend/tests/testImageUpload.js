@@ -1,4 +1,4 @@
-import { uploadImageToS3 } from "../src/services/s3Service.ts";
+import { uploadImageToS3 } from "../dist/services/s3Service.js";
 const path = require('path');
 const fs = require('fs');
 
@@ -10,7 +10,7 @@ const fs = require('fs');
 
         const result = await uploadImageToS3(folderName, fileBuffer, fileName);
         if (result.success) {
-            console.log('Image uploaded successfully. S3 URL:', result.data);
+            console.log('Image uploaded successfully. Image path:', result.data);
         } else {
             console.error('Error:', result.error);
         }

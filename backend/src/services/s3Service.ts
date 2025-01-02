@@ -35,12 +35,15 @@ async function uploadImageToS3(farmUUID: string, fileBuffer: Buffer): Promise<Re
     if (!mime || !SUPPORTED_IMAGE_TYPES.includes(mime)) {
         return {
             success: false,
-            error: 'Unsupported image type or failed to detect MIME type!',
+            error: 'Unsupported image type or failed to detect MIME type!'
         };
     }
 
     if (!bucketName) {
-        throw new Error('Bucket name is not defined in the environment variables!');
+        return {
+            success: false,
+            error: 'Invalid bucket name!'
+        };
     }
 
     const s3Key = `${farmUUID}/${filename}`;
@@ -74,7 +77,7 @@ async function uploadVideoTos3(farmUUID: string, fileBuffer: Buffer) {
     if (!farmUUID || !fileBuffer) {
         return {
             success: false,
-            error: 'Farm UUID and file buffer must be provided!'
+            error: 'Farm UUID and file buffer must be provided!',
         };
     }
 
@@ -93,12 +96,15 @@ async function uploadVideoTos3(farmUUID: string, fileBuffer: Buffer) {
     if (!mime || !SUPPORTED_VIDEO_TYPES.includes(mime)) {
         return {
             success: false,
-            error: 'Unsupported video type or failed to detect MIME type!',
+            error: 'Unsupported video type or failed to detect MIME type!'
         };
     }
 
     if (!bucketName) {
-        throw new Error('Bucket name is not defined in the environment variables!');
+        return {
+            success: false,
+            error: 'Invalid bucket name!'
+        };
     }
 
     const s3Key = `${farmUUID}/${filename}`;
