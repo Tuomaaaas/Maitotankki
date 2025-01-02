@@ -49,8 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     flagged: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      allowNull: false
+      allowNull: true
     },
     created_at: {
       type: DataTypes.DATE,

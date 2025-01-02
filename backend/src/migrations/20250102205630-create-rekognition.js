@@ -6,7 +6,8 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull: false
       },
       rekognition_uuid: {
         type: Sequelize.UUIDV4,
@@ -39,8 +40,7 @@ module.exports = {
       },
       flagged: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
+        allowNull: true
       },
       created_at: {
         type: Sequelize.DATE,

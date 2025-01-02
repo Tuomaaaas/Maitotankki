@@ -10,8 +10,7 @@ module.exports = {
 
     await queryInterface.addColumn('farms', 'is_camera_active', {
       type: Sequelize.BOOLEAN,
-      defaultValue: false,
-      allowNull: false
+      allowNull: true
     });
   },
 

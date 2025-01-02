@@ -34,8 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     is_camera_active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      allowNull: false
+      allowNull: true
     },
     created_at: {
       type: DataTypes.DATE,
