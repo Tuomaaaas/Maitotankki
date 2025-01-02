@@ -2,7 +2,7 @@
 import {Model} from 'sequelize';
 
 module.exports = (sequelize, DataTypes) => {
-  class Farm extends Model {
+  class Rekognition extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,27 +12,42 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Farm.init({
+  Rekognition.init({
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    uuid: {
+    rekognition_uuid: {
       type: DataTypes.UUIDV4,
       allowNull: false,
       unique: true
     },
-    camera_url: {
-      type: DataTypes.STRING,
+    file_upload_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'FileUploads',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
+    farm_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Farms',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
+    result: {
+      type: DataTypes.JSON,
+      allowNull: false
+    },
+    temperature: {
+      type: DataTypes.FLOAT,
       allowNull: true
     },
-    is_camera_active: {
+    flagged: {
       type: DataTypes.BOOLEAN,
       allowNull: true
     },
@@ -46,10 +61,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Farm',
-    tableName: 'farms',
+    modelName: 'Rekognition',
+    tableName: 'rekognitions',
     underscored: true
   });
 
-  return Farm;
+  return Rekognition;
 };

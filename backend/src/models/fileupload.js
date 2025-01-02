@@ -2,7 +2,7 @@
 import {Model} from 'sequelize';
 
 module.exports = (sequelize, DataTypes) => {
-  class Farm extends Model {
+  class FileUpload extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,29 +12,20 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Farm.init({
+  FileUpload.init({
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    uuid: {
+    file_uuid: {
       type: DataTypes.UUIDV4,
       allowNull: false,
       unique: true
     },
-    camera_url: {
+    file_path: {
       type: DataTypes.STRING,
-      allowNull: true
-    },
-    is_camera_active: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true
+      allowNull: false
     },
     created_at: {
       type: DataTypes.DATE,
@@ -46,10 +37,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Farm',
-    tableName: 'farms',
+    modelName: 'FileUpload',
+    tableName: 'file_uploads',
     underscored: true
   });
 
-  return Farm;
+  return FileUpload;
 };
