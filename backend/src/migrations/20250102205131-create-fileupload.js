@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false
       },
       file_uuid: {
-        type: Sequelize.UUIDV4,
+        type: Sequelize.UUID,
         allowNull: false,
         unique: true
       },

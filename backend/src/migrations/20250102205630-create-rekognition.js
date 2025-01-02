@@ -10,14 +10,14 @@ module.exports = {
         allowNull: false
       },
       rekognition_uuid: {
-        type: Sequelize.UUIDV4,
+        type: Sequelize.UUID,
         allowNull: false,
         unique: true
       },
       file_upload_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'FileUploads',
+          model: 'file_uploads',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -25,7 +25,7 @@ module.exports = {
       farm_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Farms',
+          model: 'farms',
           key: 'id',
         },
         onDelete: 'CASCADE',
