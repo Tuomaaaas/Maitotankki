@@ -23,7 +23,10 @@ async function uploadImageToS3(farmUUID: string, fileBuffer: Buffer): Promise<Re
     const filename = generateFileName(farmUUID)
 
     if (!filename) {
-        throw new Error('Filename not valid!');
+        return {
+            success: false,
+            error: 'Filename not valid!'
+        };
     }
 
     const [fileInfo] = filetype(fileBuffer);
@@ -71,14 +74,17 @@ async function uploadVideoTos3(farmUUID: string, fileBuffer: Buffer) {
     if (!farmUUID || !fileBuffer) {
         return {
             success: false,
-            error: 'Farm UUID and file buffer must be provided!',
+            error: 'Farm UUID and file buffer must be provided!'
         };
     }
 
     const filename = generateFileName(farmUUID)
 
     if (!filename) {
-        throw new Error('Filename not valid!');
+        return {
+            success: false,
+            error: 'Filename not valid!'
+        };
     }
 
     const [fileInfo] = filetype(fileBuffer);
