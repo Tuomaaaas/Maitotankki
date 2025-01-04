@@ -1,5 +1,5 @@
 import { uploadImageToS3 } from "./s3Service";
-import analyzeImageFromS3 from "./rekognitionService";
+import analyzeImageFromS3, { extractTemperatureFromResult } from "./rekognitionService";
 import { Response } from '../types/response';
 import { v4 as uuidv4 } from 'uuid';
 const { FileUpload, Rekognition} = require('../models')
@@ -51,7 +51,25 @@ async function uploadAndAnalyzeImage(image: Buffer, farm: Farm): Promise<Respons
         };
     }
 
-    const analyzeResult = await Rekognition.create({ rekognition_uuid: uuidv4(), file_upload_id: fileUpload.id, farm_id: farm.id, result: rekognitionResult.data})
+    let temperature: number | null = null;
+    let flagged: boolean = false;
+
+    if (Array.isArray(rekognitionResult.data)) {
+        temperature = extractTemperatureFromResult(rekognitionResult.data)
+    }
+
+    if (temperature) {
+        flagged = validateTemperatureRange(temperature)
+    }
+
+    const analyzeResult = await Rekognition.create({
+        rekognition_uuid: uuidv4(),
+        file_upload_id: fileUpload.id,
+        farm_id: farm.id,
+        result: rekognitionResult.data,
+        ...(temperature !== null && { temperature }),
+        ...((flagged && {flagged}))
+    });
 
     if (!analyzeResult) {
         return {
@@ -64,6 +82,14 @@ async function uploadAndAnalyzeImage(image: Buffer, farm: Farm): Promise<Respons
         success: true,
         data: filepath
     }
+}
+
+function validateTemperatureRange(temperature: number): boolean {
+    if (temperature <= 0.5 || temperature >= 6) {
+        return true
+    }
+
+    return false
 }
 
 export { uploadAndAnalyzeImage }

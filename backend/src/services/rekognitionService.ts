@@ -43,4 +43,19 @@ async function analyzeImageFromS3(objectKey: string):Promise<Response<TextDetect
     }
 }
 
+function extractTemperatureFromResult(rekognitionResponse: TextDetectionList): number | null {
+    for (const item of rekognitionResponse) {
+        const detectedText = item.DetectedText;
+
+        const match = detectedText?.match(/([-+]?\d*\.?\d+)\s*[CС]/);
+
+        if (match) {
+            return parseFloat(match[1]);
+        }
+    }
+
+    return null;
+}
+
 export default analyzeImageFromS3;
+export { extractTemperatureFromResult }
