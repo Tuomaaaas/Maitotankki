@@ -33,20 +33,13 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
       onDelete: 'CASCADE',
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     }
   }, {
     sequelize,
     modelName: 'FarmUser',
     tableName: 'farm_users',
-    underscored: true
+    underscored: true,
+    timestamps: true
   });
 
   return FarmUser;

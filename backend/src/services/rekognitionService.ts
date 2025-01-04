@@ -6,8 +6,9 @@ import { Response } from '../types/response';
 dotenv.config();
 
 const rekognition = new AWS.Rekognition({ region: process.env.AWS_REGION })
+const bucketName = process.env.AWS_BUCKET_NAME
 
-async function analyzeImageFromS3(bucketName:string, objectKey: string):Promise<Response<TextDetectionList>> {
+async function analyzeImageFromS3(objectKey: string):Promise<Response<TextDetectionList | string>> {
     if (!bucketName || !objectKey) {
         return {
             success: false,

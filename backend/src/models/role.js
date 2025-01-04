@@ -22,20 +22,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     }
   }, {
     sequelize,
     modelName: 'Role',
     tableName: 'roles',
-    underscored: true
+    underscored: true,
+    timestamps: true
   });
 
   return Role;

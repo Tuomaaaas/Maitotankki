@@ -35,20 +35,13 @@ module.exports = (sequelize, DataTypes) => {
     is_camera_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     }
   }, {
     sequelize,
     modelName: 'Farm',
     tableName: 'farms',
-    underscored: true
+    underscored: true,
+    timestamps: true
   });
 
   return Farm;

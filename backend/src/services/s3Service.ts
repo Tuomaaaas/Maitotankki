@@ -20,7 +20,7 @@ async function uploadImageToS3(farmUUID: string, fileBuffer: Buffer): Promise<Re
         };
     }
 
-    const filename = generateFileName(farmUUID)
+    const filename = generateFileName()
 
     if (!filename) {
         return {
@@ -81,7 +81,7 @@ async function uploadVideoTos3(farmUUID: string, fileBuffer: Buffer) {
         };
     }
 
-    const filename = generateFileName(farmUUID)
+    const filename = generateFileName()
 
     if (!filename) {
         return {
