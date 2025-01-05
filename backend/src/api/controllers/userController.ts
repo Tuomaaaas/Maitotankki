@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 const { User } = require('../../models');
 
-// @ts-ignore
-export const getProfile = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const userId = req.body.userId;
 
+export const getProfile = async (req: Request, res: Response) => {
+    const userId = req.body.userId;
+
+    try {
         const user = await User.findOne({ where: { id: userId } });
 
         if (!user) {
@@ -13,8 +13,12 @@ export const getProfile = async (req: Request, res: Response): Promise<void> => 
             return;
         }
 
-        res.json(user.get()); // Send user profile
+        res.json(user.get());
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        if (error instanceof Error) {
+            return res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            });
+        }
     }
 };

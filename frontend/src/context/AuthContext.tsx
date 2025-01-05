@@ -61,7 +61,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             await LogUserOut();
             setAuthState(false, 'Logout successful!');
         } catch (error) {
-            setAuthState(false, error instanceof Error ? error.message : 'Logout failed');
+            if (error instanceof Error) {
+                setAuthState(false, error.message);
+            } else {
+                setAuthState(false, 'Login failed');
+            }
         }
     };
 

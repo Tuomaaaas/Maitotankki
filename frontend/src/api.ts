@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -39,10 +39,9 @@ export async function login(firstName: string, lastName: string) {
 }
 
 
-
 export async function logout() {
     try {
-        const response = await api.post('/logout', {}, {withCredentials: true})
+        const response = await api.post('/logout', {}, { withCredentials: true })
 
         return response
     } catch (error) {
@@ -60,9 +59,10 @@ export async function logout() {
     }
 }
 
+
 export async function getProfile() {
     try {
-        const response = await api.get('/profile', {withCredentials: true});
+        const response = await api.get('/profile', { withCredentials: true });
 
         return response;
     } catch (error) {

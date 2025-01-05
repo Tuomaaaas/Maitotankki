@@ -6,8 +6,8 @@ import '../styles/LoginPage.css'
 const LoginPage = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const navigate = useNavigate()
     const [error, setError] = useState('');
+    const navigate = useNavigate()
     const { login, message, isAuthenticated } = useContext(AuthContext);
 
     useEffect(() => {
@@ -26,10 +26,6 @@ const LoginPage = () => {
 
         try {
             await login(firstName, lastName);
-
-            if (isAuthenticated) {
-                navigate('/dashboard');
-            }
         } catch (error) {
             if (error instanceof Error) {
                 setError(error.message);

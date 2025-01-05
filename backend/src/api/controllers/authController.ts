@@ -1,18 +1,16 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
+import { Request, Response } from "express";
 import { generateToken } from "../../utils/jwt";
 const { User } = require('../../models')
 
 
-
-// @ts-ignore
-export const login: RequestHandler = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
     const { firstName, lastName } = req.body
 
-
-        const user = await User.findOne({ where: { first_name: firstName, last_name: lastName }})
+    try {
+        const user = await User.findOne({where: {first_name: firstName, last_name: lastName}})
 
         if (!user) {
-        return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Invalid credentials' });
         }
 
         const token = generateToken(user.id)
@@ -28,9 +26,25 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
         });
 
         res.json({ message: 'Login successful' });
+    } catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            });
+        }
+    }
 }
 
+
 export const logout = (req: Request, res: Response) => {
-    res.clearCookie('token', { path: '/' });
-    res.json({ message: 'Logout successful' });
-};
+    try {
+        res.clearCookie('token', { path: '/' });
+        res.json({ message: 'Logout successful' });
+    } catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            });
+        }
+    }
+}
