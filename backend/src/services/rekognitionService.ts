@@ -6,8 +6,9 @@ import { Response } from '../types/response';
 dotenv.config();
 
 const rekognition = new AWS.Rekognition({ region: process.env.AWS_REGION })
+const bucketName = process.env.AWS_BUCKET_NAME
 
-async function analyzeImageFromS3(bucketName:string, objectKey: string):Promise<Response<TextDetectionList>> {
+async function analyzeImageFromS3(objectKey: string):Promise<Response<TextDetectionList | string>> {
     if (!bucketName || !objectKey) {
         return {
             success: false,
@@ -42,4 +43,19 @@ async function analyzeImageFromS3(bucketName:string, objectKey: string):Promise<
     }
 }
 
+function extractTemperatureFromResult(rekognitionResponse: TextDetectionList): number | null {
+    for (const item of rekognitionResponse) {
+        const detectedText = item.DetectedText;
+
+        const match = detectedText?.match(/([-+]?\d*\.?\d+)\s*[CС]/);
+
+        if (match) {
+            return parseFloat(match[1]);
+        }
+    }
+
+    return null;
+}
+
 export default analyzeImageFromS3;
+export { extractTemperatureFromResult }

@@ -1,8 +1,4 @@
-function generateFileName(farmUUID: string): string {
-    if (!farmUUID) {
-        throw Error('Farm UUID not defined! Cannot create filename.')
-    }
-
+function generateFileName(): string {
     const now = new Date();
 
     const year = now.getFullYear();
@@ -12,7 +8,7 @@ function generateFileName(farmUUID: string): string {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
 
-    return `${farmUUID}-${year}${month}${day}${hours}${minutes}${seconds}`;
+    return `${year}${month}${day}${hours}${minutes}${seconds}`;
 }
 
 export default generateFileName;

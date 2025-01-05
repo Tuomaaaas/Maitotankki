@@ -33,20 +33,13 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
       onDelete: 'SET NULL',
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     }
   }, {
     sequelize,
     modelName: 'User',
     tableName: 'users',
-    underscored: true
+    underscored: true,
+    timestamps: true
   });
 
   return User;

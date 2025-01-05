@@ -50,20 +50,13 @@ module.exports = (sequelize, DataTypes) => {
     flagged: {
       type: DataTypes.BOOLEAN,
       allowNull: true
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     }
   }, {
     sequelize,
     modelName: 'Rekognition',
     tableName: 'rekognitions',
-    underscored: true
+    underscored: true,
+    timestamps: true
   });
 
   return Rekognition;
