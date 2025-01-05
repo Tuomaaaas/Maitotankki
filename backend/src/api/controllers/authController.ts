@@ -8,7 +8,7 @@ const { User } = require('../../models')
 export const login: RequestHandler = async (req: Request, res: Response) => {
     const { firstName, lastName } = req.body
 
-    try {
+
         const user = await User.findOne({ where: { first_name: firstName, last_name: lastName }})
 
         if (!user) {
@@ -28,7 +28,9 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
         });
 
         res.json({ message: 'Login successful' });
-    } catch (error) {
-        return res.status(500).json({ message: "Internal Server Error" });
-    }
 }
+
+export const logout = (req: Request, res: Response) => {
+    res.clearCookie('token', { path: '/' });
+    res.json({ message: 'Logout successful' });
+};

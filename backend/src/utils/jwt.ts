@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken'
 import CustomJwtPayload from "../types/CustomJwtPayload";
+import dotenv from 'dotenv'
+dotenv.config();
 
 const SECRET_KEY = process.env.JWT_SECRET;
 const EXPIRATION_TIME = process.env.JWT_EXPIRATION
