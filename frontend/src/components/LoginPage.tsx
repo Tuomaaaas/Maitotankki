@@ -1,23 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from '../api'
+import { AuthContext } from "../context/AuthContext.tsx";
 import '../styles/LoginPage.css'
 
 const LoginPage = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
     const navigate = useNavigate()
+    const { login, message, isAuthenticated } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/dashboard');
+        }
+    }, [isAuthenticated, navigate])
+
+    useEffect(() => {
+        setError(message);
+    }, [message]);
 
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault()
+        e.preventDefault();
+        setError('');
+
         try {
-            const response = await login(firstName, lastName)
-            console.log(response)
-            navigate('/dashboard')
+            await login(firstName, lastName);
         } catch (error) {
-            setError('Invalid credentials');
-            console.log(error)
+            if (error instanceof Error) {
+                setError(error.message);
+            }
         }
     }
 
