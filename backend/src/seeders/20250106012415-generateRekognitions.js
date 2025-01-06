@@ -96,6 +96,92 @@ module.exports = {
         temperature: 2.9,
         created_at: new Date(Date.now() - 90 * 60 * 1000),
         updated_at: new Date(Date.now() - 90 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: '3afdb6e1-0dd7-4501-8f9c-9ab10ff1139f',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 0.5,
+        flagged: true,
+        created_at: new Date(Date.now() - 100 * 60 * 1000),
+        updated_at: new Date(Date.now() - 100 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: '7d3d3f0e-5b7f-4695-b2b6-d90c2fc4e7a5',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 6.7,
+        flagged: true,
+        created_at: new Date(Date.now() - 110 * 60 * 1000),
+        updated_at: new Date(Date.now() - 110 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: '5e4d3120-7e6b-46c5-91bb-8b7c869be5d2',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 5.5,
+        created_at: new Date(Date.now() - 120 * 60 * 1000),
+        updated_at: new Date(Date.now() - 120 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: 'd6a718e8-d2bb-4c9c-b3d3-88261480d2e4',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 3.3,
+        created_at: new Date(Date.now() - 130 * 60 * 1000),
+        updated_at: new Date(Date.now() - 130 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: '9e810dbd-154b-4412-beb7-526d800b640c',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 6.8,
+        flagged: true,
+        created_at: new Date(Date.now() - 140 * 60 * 1000),
+        updated_at: new Date(Date.now() - 140 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: '68bdef15-19d8-4b2d-bba3-43f82de539c9',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 4.1,
+        created_at: new Date(Date.now() - 150 * 60 * 1000),
+        updated_at: new Date(Date.now() - 150 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: '23d43ae2-76c7-4375-8a8e-6627358c15f9',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 0.4,
+        flagged: true,
+        created_at: new Date(Date.now() - 160 * 60 * 1000),
+        updated_at: new Date(Date.now() - 160 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: 'aa7d726f-7c30-4b22-a0fa-dba346d8e5fb',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 5.9,
+        created_at: new Date(Date.now() - 170 * 60 * 1000),
+        updated_at: new Date(Date.now() - 170 * 60 * 1000)
+      },
+      {
+        rekognition_uuid: '4cfdd0ff-9789-4d6d-98c4-3ab6f37e8ec5',
+        file_upload_id: 1,
+        farm_id: 1,
+        result: JSON.stringify({ 'TEST RESULT!': 'TEST RESULT!' }),
+        temperature: 6.5,
+        flagged: true,
+        created_at: new Date(Date.now() - 180 * 60 * 1000),
+        updated_at: new Date(Date.now() - 180 * 60 * 1000)
       }
     ]);
   },
