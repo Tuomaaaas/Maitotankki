@@ -22,6 +22,7 @@ const LoginPage = () => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError('');
 
         try {
             await login(firstName, lastName);

@@ -7,24 +7,22 @@ import '../styles/ManageFarmPage.css';
 const ManageFarmPage = () => {
     const { farmInformation, setFarmInformation } = useFarm();
 
-    // Initialize farmObject with farmInformation from context
     const [farmObject, setFarmObject] = useState({
-        farmName: farmInformation.farmName,
-        camera_url: farmInformation.camera_url,
-        is_camera_active: farmInformation.is_camera_active
+        farmName: '',
+        camera_url: '',
+        is_camera_active: false
     });
 
-    // Sync farmObject with farmInformation when farmInformation changes
     useEffect(() => {
         setFarmObject({
             farmName: farmInformation.farmName,
             camera_url: farmInformation.camera_url,
             is_camera_active: farmInformation.is_camera_active
         });
-    }, [farmInformation]); // Trigger whenever farmInformation changes
+    }, [farmInformation]);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = e.target;
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = event.target;
         setFarmObject(prevState => ({
             ...prevState,
             [id]: value
@@ -48,8 +46,7 @@ const ManageFarmPage = () => {
             };
 
             const response = await updateFarm(farmData);
-            console.log(response);
-            setFarmInformation(response.data);  // Update context after save
+            setFarmInformation(response.data);
             alert('Farm settings saved!');
         } catch (error) {
             console.error('Error saving farm settings:', error);
