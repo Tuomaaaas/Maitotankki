@@ -51,7 +51,7 @@ export const updateFarm: RequestHandler = async (req: Request, res: Response) =>
             return;
         }
 
-        farm.farmName = farmName
+        farm.name = farmName
         farm.camera_url = cameraUrl
         farm.is_camera_active = isCameraActive
 

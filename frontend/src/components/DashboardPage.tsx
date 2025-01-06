@@ -9,7 +9,7 @@ const DashboardPage = () => {
 
     useEffect(() => {
         const fetchFarmData = async () => {
-            if (!farmInformation) {
+            if (!farmInformation.farmId) {
                 setLoading(true);
                 try {
                     const response = await getFarm();
@@ -29,7 +29,7 @@ const DashboardPage = () => {
         };
 
         fetchFarmData();
-    }, [farmInformation, setFarmInformation]);
+    }, [farmInformation.farmId, setFarmInformation]);
 
     return (
         <div>
