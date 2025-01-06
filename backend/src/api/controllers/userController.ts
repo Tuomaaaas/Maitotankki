@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import {Request, Response, RequestHandler} from "express";
 const { User } = require('../../models');
 
 
-export const getProfile = async (req: Request, res: Response) => {
+export const getProfile: RequestHandler = async (req: Request, res: Response) => {
     const userId = req.body.userId;
 
     try {
@@ -16,7 +16,7 @@ export const getProfile = async (req: Request, res: Response) => {
         res.json(user.get());
     } catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({
+            res.status(500).json({
                 message: error.message || 'Internal Server Error'
             });
         }
