@@ -121,3 +121,30 @@ export async function updateFarm(farmData: object) {
         }
     }
 }
+
+
+export async function getRekognitions(limit: number, farmId: number) {
+    try {
+        const response = await api.get('/rekognitions', {
+            params: {
+                limit: limit,
+                farmId: farmId
+            },
+            withCredentials: true
+        });
+
+        return response;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response) {
+                throw new Error(error.response.data.message || 'Failed to fetch rekognitions');
+            } else if (error.request) {
+                throw new Error('No response from the server');
+            } else {
+                throw new Error(error.message || 'Unknown error occurred');
+            }
+        } else {
+            throw new Error('An unknown error occurred');
+        }
+    }
+}

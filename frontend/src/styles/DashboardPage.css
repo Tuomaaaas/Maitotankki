@@ -1,8 +1,16 @@
-.dashboard {
-    margin-top: 70px;
-    padding: 20px;
+.dashboard-container {
+    text-align: center;
 }
 
-.content {
-    padding: 20px;
+.chart-container {
+    width: 70vw;
+    height: 50vh;
+    margin-left: -10vw;
+    position: relative;
+}
+
+#title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
 }

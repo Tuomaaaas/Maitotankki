@@ -54,6 +54,11 @@
     color: white;
 }
 
+.save-btn-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
 .save-btn {
     padding: 12px 20px;
     font-size: 16px;

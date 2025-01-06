@@ -65,7 +65,7 @@ const ManageFarmPage = () => {
                     <input
                         type="text"
                         id="farmName"
-                        value={farmObject.farmName}
+                        value={farmObject.farmName || ""}
                         onChange={handleInputChange}
                         placeholder="Enter farm name"
                     />
@@ -76,7 +76,7 @@ const ManageFarmPage = () => {
                     <input
                         type="text"
                         id="camera_url"
-                        value={farmObject.camera_url}
+                        value={farmObject.camera_url || ""}
                         onChange={handleInputChange}
                         placeholder="Enter camera URL"
                     />
@@ -95,8 +95,8 @@ const ManageFarmPage = () => {
                     </div>
                 </div>
 
-                <div className="form-group">
-                    <button onClick={handleSave}>
+                <div className="save-btn-container">
+                    <button className="save-btn" onClick={handleSave}>
                         Save Settings
                     </button>
                 </div>
