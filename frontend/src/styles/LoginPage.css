@@ -9,7 +9,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../../public/images/login_page_background.jpg');
+    background-image: url('../../images/login_page_background.jpg');
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -32,7 +32,7 @@ h2 {
     text-align: center;
 }
 
-input, button {
+input {
     width: calc(100% - 2rem);
     padding: 1rem;
     margin: 0.5rem 0;
@@ -40,15 +40,28 @@ input, button {
     border-radius: 4px;
 }
 
-button {
+#submitButton {
     background-color: #4CAF50;
     color: white;
-    border: none;
     cursor: pointer;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    width: calc(100% - 2rem);
+    transition: background-color 0.3s ease;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
-button:hover {
+#submitButton:hover {
     background-color: #45a049;
+}
+
+#submitButton:focus {
+    background-color: #45a049;
+}
+
+#submitButton:active {
+    background-color: #3c7a3b;
 }
 
 .error {

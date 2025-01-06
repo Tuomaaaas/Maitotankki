@@ -26,6 +26,7 @@ const LoginPage = () => {
 
         try {
             await login(firstName, lastName);
+            setError('');
         } catch (error) {
             if (error instanceof Error) {
                 setError(error.message);
@@ -54,7 +55,7 @@ const LoginPage = () => {
                         required
                     />
                     {error && <div className="error">{error}</div>}
-                    <button type="submit">Login</button>
+                    <button id="submitButton" type="submit">Login</button>
                 </form>
         </div>
     );

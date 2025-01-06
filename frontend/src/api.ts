@@ -79,3 +79,45 @@ export async function getProfile() {
         }
     }
 }
+
+
+export async function getFarm() {
+    try {
+        const response = await api.get('/farms', { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response) {
+                throw new Error(error.response.data.message || 'Farm fetch failed');
+            } else if (error.request) {
+                throw new Error('No response from the server');
+            } else {
+                throw new Error(error.message || 'Unknown error occurred');
+            }
+        } else {
+            throw new Error('An unknown error occurred');
+        }
+    }
+}
+
+
+export async function updateFarm(farmData: object) {
+    try {
+        const response = await api.put('/farms', farmData, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response) {
+                throw new Error(error.response.data.message || 'Farm update failed');
+            } else if (error.request) {
+                throw new Error('No response from the server');
+            } else {
+                throw new Error(error.message || 'Unknown error occurred');
+            }
+        } else {
+            throw new Error('An unknown error occurred');
+        }
+    }
+}
